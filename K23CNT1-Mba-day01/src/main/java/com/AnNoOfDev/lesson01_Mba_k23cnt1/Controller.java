@@ -8,6 +8,6 @@ public class Controller {
 
     @GetMapping("/")
     public String sayHello() {
-        return "✅ Spring Boot is running successfully!";
+        return "✅ An Not Dev Xin Kính Chào !";
     }
 }
