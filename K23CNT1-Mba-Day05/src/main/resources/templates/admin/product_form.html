@@ -1,0 +1,17 @@
+<main th:replace="fragments/_admin_layout::content(~{::div.form-content})" xmlns:th="http://www.w3.org/1999/xhtml">
+    <div class="form-content">
+        <h1 class="h2" th:text="${product.id == null} ? 'Thêm Mới Sản phẩm' : 'Sửa Đổi Sản phẩm'"></h1>
+
+        <form th:action="@{/admin/products/save}" th:object="${product}" method="post">
+            <input type="hidden" th:field="*{id}" />
+
+            <div class="mb-3">
+                <label for="name">Tên:</label>
+                <input type="text" th:field="*{name}" id="name" class="form-control" />
+            </div>
+
+            <button type="submit" class="btn btn-success">Lưu</button>
+            <a th:href="@{/admin/products}" class="btn btn-secondary">Hủy</a>
+        </form>
+    </div>
+</main>

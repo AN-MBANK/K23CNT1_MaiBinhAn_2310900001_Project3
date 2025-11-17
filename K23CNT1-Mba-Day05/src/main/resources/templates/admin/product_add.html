@@ -1,0 +1,16 @@
+<div id="content" class="container-fluid" xmlns:th="http://www.w3.org/1999/xhtml">
+    <h2>Thêm mới Sản phẩm</h2>
+
+    <form th:action="@{/admin/products/save}" method="post" th:object="${productDto}">
+        <div class="form-group">
+            <label for="name">Tên Sản phẩm:</label>
+            <input type="text" id="name" th:field="*{name}" class="form-control" />
+        </div>
+        <div class="form-group">
+            <label for="price">Giá:</label>
+            <input type="number" id="price" th:field="*{price}" class="form-control" />
+        </div>
+        <button type="submit" class="btn btn-success">Lưu</button>
+        <a th:href="@{/admin/products}" class="btn btn-secondary">Hủy</a>
+    </form>
+</div>

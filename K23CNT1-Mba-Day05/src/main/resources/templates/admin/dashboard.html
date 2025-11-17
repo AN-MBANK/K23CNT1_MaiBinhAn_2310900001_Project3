@@ -1,0 +1,28 @@
+<!doctype html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="fragments/_admin_layout::adminHead('Admin::Tổng Quan')"></head>
+
+<body>
+<header th:replace="fragments/_admin_layout::adminHeader"></header>
+
+<div class="container-fluid">
+    <div class="row">
+        <nav th:replace="fragments/_admin_layout::adminSidebar"></nav>
+
+        <main th:replace="fragments/_admin_layout::content(~{::div.dashboard-content})">
+            <div class="dashboard-content">
+                <h1 class="h2">Tổng Quan Hệ Thống</h1>
+                <p>Dữ liệu thống kê nhanh:</p>
+                <div class="row">
+                    <div class="col-md-4"><div class="alert alert-info">Tổng Sản phẩm: 100</div></div>
+                    <div class="col-md-4"><div class="alert alert-warning">Đơn hàng mới: 5</div></div>
+                </div>
+            </div>
+        </main>
+    </div>
+</div>
+
+<footer th:replace="fragments/_admin_layout::adminFooter"></footer>
+</body>
+</html>

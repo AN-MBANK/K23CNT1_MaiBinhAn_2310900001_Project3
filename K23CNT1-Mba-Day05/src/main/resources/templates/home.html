@@ -1,0 +1,24 @@
+<!doctype html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="fragments/_layout::head('Devmaster::Trang Chủ')">
+    <title>Dev Of Galaxy</title>
+</head>
+
+<body>
+<header th:replace="fragments/_layout :: header"></header>
+
+<main class="container py-4">
+    <div class="alert alert-success">
+        <h2>Chào mừng đến với DevNO1!</h2>
+        <p>Khám phá các khóa học công nghệ thông tin hàng đầu vũ trụ của chúng tôi.</p>
+    </div>
+
+    <h3 class="mt-4">Các dịch vụ chính</h3>
+    <nav th:insert="fragments/_layout::menu"></nav>
+
+</main>
+
+<footer th:replace="fragments/_layout :: footer"></footer>
+</body>
+</html>

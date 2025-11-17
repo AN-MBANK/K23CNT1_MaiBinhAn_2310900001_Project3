@@ -1,0 +1,43 @@
+rong src/main/resources/static/css/styles.css */
+
+/* Đảm bảo Footer luôn ở cuối trang */
+html, body {
+    height: 100%;
+}
+body {
+    display: flex;
+    flex-direction: column;
+}
+.mt-auto {
+    margin-top: auto !important;
+}
+
+/* Tùy chỉnh Logo trong Header */
+.navbar-brand img {
+    /* Bộ lọc CSS này sẽ làm cho hình ảnh Logo (vốn là màu) chuyển sang màu trắng */
+    filter: brightness(0) invert(1);
+    transition: filter 0.3s ease-in-out; /* Tạo hiệu ứng chuyển đổi mượt mà */
+}
+
+/* (Tuỳ chọn) Khi rê chuột vào logo, trả về màu sắc ban đầu */
+.navbar-brand:hover img {
+    filter: none;
+}
+/* Đảm bảo nội dung chính có padding hợp lý */
+main {
+    padding-top: 20px;
+    padding-bottom: 20px;
+}
+
+/* Tùy chỉnh màu sắc link trong menu Footer */
+.footer .nav-link {
+    padding: 0 10px; /* Giảm padding ngang cho link trong footer */
+    opacity: 0.8;
+    transition: opacity 0.3s;
+}
+
+.footer .nav-link:hover {
+    opacity: 1;
+    color: #fff !important;
+    text-decoration: underline;
+}

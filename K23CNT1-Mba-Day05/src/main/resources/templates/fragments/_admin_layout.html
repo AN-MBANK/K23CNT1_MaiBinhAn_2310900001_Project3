@@ -1,0 +1,38 @@
+<!doctype html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head th:fragment="adminHead(title)">
+    <meta charset="UTF-8">
+    <link th:href="@{/css/bootstrap.min.css}" rel="stylesheet" />
+    <title th:text="${title}">Admin Dashboard</title>
+</head>
+
+<header th:fragment="adminHeader" class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <div class="container-fluid">
+        <a class="navbar-brand" th:href="@{/admin/dashboard}">ADMIN DASHBOARD</a>
+    </div>
+</header>
+
+<nav th:fragment="adminSidebar" class="col-md-3 col-lg-2 d-md-block bg-light sidebar collapse">
+    <div class="position-sticky pt-3">
+        <h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted">
+            <span>QUẢN LÝ NỘI DUNG</span>
+        </h6>
+        <ul class="nav flex-column">
+            <li class="nav-item"><a class="nav-link" th:href="@{/admin/products}">Quản lý Sản phẩm</a></li>
+            <li class="nav-item"><a class="nav-link" th:href="@{/admin/users}">Quản lý Người dùng</a></li>
+        </ul>
+    </div>
+</nav>
+
+<footer th:fragment="adminFooter" class="footer mt-auto py-3 bg-dark text-white">
+    <div class="container">
+        <span class="text-muted">© 2024 Admin Panel.</span>
+    </div>
+</footer>
+
+<section th:fragment="content(mainContent)" class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
+    <div th:replace="${mainContent}"></div>
+</section>
+
+</html>
