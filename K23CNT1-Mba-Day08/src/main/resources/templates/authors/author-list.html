@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="vi">
+<head>
+    <title>Author List</title>
+    <link rel="stylesheet"
+          href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css">
+</head>
+<body style="background: #ccc">
+<section class="container my-3 bg-white">
+    <h2>Author List</h2>
+
+    <a th:href="@{/authors/new}" class="btn btn-success my-2">Add New Author</a>
+
+    <table class="table table-bordered">
+        <thead>
+        <tr>
+            <th>ID</th>
+            <th>Code</th>
+            <th>Name</th>
+            <th>Email</th>
+            <th>Phone</th>
+            <th>Actions</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="author : ${authors}">
+            <td th:text="${author.id}">1</td>
+            <td th:text="${author.code}">Code</td>
+            <td th:text="${author.name}">Name</td>
+            <td th:text="${author.email}">Email</td>
+            <td th:text="${author.phone}">Phone</td>
+            <td>
+                <a th:href="@{/authors/edit/{id} (id=${author.id})}" class="btn btn-sm btn-primary">Edit</a>
+                <a th:href="@{/authors/delete/{id} (id=${author.id})}"
+                   onclick="return confirm('Are you sure you want to delete this author?');"
+                   class="btn btn-sm btn-danger">Delete</a>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+
+    <a th:href="@{/books}" class="btn btn-info">Go to Book List</a>
+
+</section>
+</body>
+</html>

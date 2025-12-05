@@ -1,9 +1,9 @@
 package K23CNT1_Mba_Day08.repository;
 
-import K23CNT1_Mba_Day08.entity.Author;
+import K23CNT1_Mba_Day08.entity.ProductConfig;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface AuthorRepository extends JpaRepository<Author, Long> {
+public interface ProductConfigRepository extends JpaRepository<ProductConfig, Long> {
 }
