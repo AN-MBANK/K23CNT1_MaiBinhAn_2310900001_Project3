@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="vi" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Sản phẩm yêu thích - MbaEvolutionAI</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-50 text-slate-800">
+
+<div th:replace="~{fragments/mba-header :: navbar}"></div>
+
+<div class="max-w-7xl mx-auto px-4 py-12 min-h-screen">
+    <h1 class="text-3xl font-bold text-gray-900 mb-8">Sản phẩm yêu thích ❤️</h1>
+
+    <div th:if="${wishlist.isEmpty()}" class="text-center py-12">
+        <p class="text-gray-500">Bạn chưa thích sản phẩm nào.</p>
+        <a th:href="@{/shop}" class="text-brand-600 hover:underline">Đi dạo cửa hàng</a>
+    </div>
+
+    <div th:unless="${wishlist.isEmpty()}" class="grid grid-cols-1 md:grid-cols-4 gap-6">
+        <div th:each="item : ${wishlist}" class="bg-white p-4 rounded-xl shadow hover:shadow-lg transition">
+            <img th:src="${item.product.mbaImage}" class="w-full h-48 object-contain mb-4">
+            <h3 class="font-bold text-gray-900 truncate" th:text="${item.product.mbaName}"></h3>
+            <p class="text-red-600 font-bold mb-4" th:text="${#numbers.formatCurrency(item.product.mbaPrice)}"></p>
+
+            <div class="flex gap-2">
+                <a th:href="@{/wishlist/toggle/{id}(id=${item.product.mbaProductId})}"
+                   class="px-3 py-2 border rounded-lg hover:bg-gray-100 text-red-500">
+                    Xóa
+                </a>
+                <a th:href="@{/cart/add/{id}(id=${item.product.mbaProductId})}"
+                   class="flex-1 px-3 py-2 bg-blue-600 text-white text-center rounded-lg hover:bg-blue-700">
+                    Mua ngay
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>

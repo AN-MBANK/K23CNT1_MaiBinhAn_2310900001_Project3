@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="vi" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8" />
+    <title>Giới thiệu - MbaEvolutionAI</title>
+    <link rel="stylesheet" th:href="@{/assets/index.css}" />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script th:src="@{/js/tailwind-config.js}"></script>
+</head>
+<body class="bg-gray-50 text-slate-800 antialiased font-sans min-h-screen flex flex-col">
+
+<div th:replace="~{fragments/mba-header :: navbar}"></div>
+
+<main class="flex-grow max-w-6xl mx-auto px-4 py-16">
+    <h1 class="text-4xl font-bold text-gray-900 mb-6">Về MbaEvolutionAI</h1>
+    <p class="text-lg text-gray-700 leading-relaxed">
+        MbaEvolutionAI được xây dựng với sứ mệnh cung cấp trải nghiệm mua sắm thiết bị công nghệ tiên tiến nhất, được hỗ trợ bởi trí tuệ nhân tạo.
+        Chúng tôi tin rằng quyết định mua sắm nên dựa trên dữ liệu và phân tích khách quan, không chỉ là cảm tính.
+    </p>
+    <h2 class="text-2xl font-bold text-gray-900 mt-10 mb-4">Giá trị cốt lõi</h2>
+    <ul class="list-disc list-inside space-y-2 text-gray-700">
+        <li>**Sự minh bạch:** Cung cấp thông số và giá cả rõ ràng.</li>
+        <li>**Đổi mới AI:** Tích hợp Chatbot và Công cụ so sánh để giúp khách hàng đưa ra quyết định thông minh.</li>
+        <li>**Hỗ trợ:** Cam kết dịch vụ chăm sóc khách hàng 24/7.</li>
+    </ul>
+</main>
+
+<div th:replace="~{fragments/mba-footer :: footer}"></div>
+</body>
+</html>

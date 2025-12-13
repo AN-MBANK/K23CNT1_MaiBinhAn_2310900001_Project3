@@ -1,0 +1,50 @@
+<div th:fragment="list(orders)" xmlns:th="http://www.w3.org/1999/xhtml">
+    <div class="p-6 border-b border-gray-100 flex justify-between items-center">
+        <h3 class="text-lg font-bold text-gray-900">Quản lý Đơn hàng</h3>
+        <a th:href="@{/mba-admin}" class="text-brand-600 hover:text-brand-800 text-sm font-medium">Làm mới</a>
+    </div>
+    <div class="overflow-x-auto">
+        <table class="w-full">
+            <thead class="bg-gray-50">
+            <tr>
+                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Mã Đơn</th>
+                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Khách hàng</th>
+                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Tổng tiền</th>
+                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Trạng thái</th>
+                <th class="px-6 py-3 text-right text-xs font-medium text-gray-500 uppercase">Ngày đặt</th>
+            </tr>
+            </thead>
+            <tbody class="divide-y divide-gray-200">
+            <tr th:each="order : ${orders}" class="hover:bg-gray-50">
+                <td class="px-6 py-4 whitespace-nowrap text-sm font-bold"
+                    th:text="'#' + ${order.mbaOrderId}"></td>
+
+                <td class="px-6 py-4 whitespace-nowrap text-sm">
+                    <div class="font-medium text-gray-900" th:text="${order.mbaFullName}"></div>
+                    <div class="text-gray-500 text-xs" th:text="${order.mbaPhone}"></div>
+                </td>
+
+                <td class="px-6 py-4 whitespace-nowrap text-sm font-bold text-brand-600"
+                    th:text="${#numbers.formatCurrency(order.mbaTotalAmount)}"></td>
+
+                <td class="px-6 py-4 whitespace-nowrap">
+                    <select
+                            th:data-order-id="${order.mbaOrderId}"
+                            th:onchange="'updateOrderStatus(' + ${order.mbaOrderId} + ', this.value)'"
+                            class="text-xs font-semibold rounded-full px-3 py-1 border-gray-300 focus:ring-brand-500"
+                    >
+                        <option value="PENDING" th:selected="${order.mbaStatus == 'PENDING'}">Chờ xử lý</option>
+                        <option value="CONFIRMED" th:selected="${order.mbaStatus == 'CONFIRMED'}">Đã xác nhận</option>
+                        <option value="SHIPPED" th:selected="${order.mbaStatus == 'SHIPPED'}">Đang giao</option>
+                        <option value="COMPLETED" th:selected="${order.mbaStatus == 'COMPLETED'}">Hoàn thành</option>
+                        <option value="CANCELLED" th:selected="${order.mbaStatus == 'CANCELLED'}">Đã hủy</option>
+                    </select>
+                </td>
+
+                <td class="px-6 py-4 whitespace-nowrap text-right text-xs text-gray-500"
+                    th:text="${#temporals.format(order.mbaOrderDate, 'dd/MM/yyyy HH:mm')}"></td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

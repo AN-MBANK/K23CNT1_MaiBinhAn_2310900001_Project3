@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="vi" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Giỏ hàng - MbaEvolutionAI</title>
+
+    <link rel="stylesheet" th:href="@{/assets/index.css}" />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <script th:src="@{/js/tailwind-config.js}"></script>
+</head>
+<body class="bg-gray-50 text-slate-800 antialiased font-sans">
+
+<div th:replace="~{fragments/mba-header :: navbar}"></div>
+
+<div class="max-w-7xl mx-auto px-4 py-8 min-h-screen">
+    <h1 class="text-3xl font-bold text-gray-900 mb-8">Giỏ hàng của tôi</h1>
+
+    <div th:if="${detailedCart.empty}" class="text-center py-20 bg-white rounded-xl shadow-sm border border-gray-100">
+        <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-gray-300 mx-auto mb-4"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><path d="M3 6h18"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>
+        <p class="text-gray-500">Giỏ hàng của bạn đang trống.</p>
+        <a th:href="@{/shop}" class="mt-4 inline-block text-brand-600 font-medium hover:underline">Tiếp tục mua sắm</a>
+    </div>
+
+    <div th:unless="${detailedCart.empty}" class="flex flex-col lg:flex-row gap-8">
+        <div class="lg:w-3/4 space-y-6">
+            <div th:each="entry : ${detailedCart}" class="flex gap-4 p-4 bg-white rounded-xl border border-gray-100 shadow-sm">
+                <div th:with="item=${entry.key}, quantity=${entry.value}" class="flex w-full">
+                    <div class="w-24 h-24 rounded-lg overflow-hidden border border-gray-200 flex-shrink-0">
+                        <img th:src="${item.image}" th:alt="${item.name}" class="w-full h-full object-cover" />
+                    </div>
+                    <div class="flex-1 flex flex-col justify-between ml-4">
+                        <div>
+                            <h3 class="font-medium text-gray-900 line-clamp-1" th:text="${item.name}"></h3>
+                            <p class="text-sm text-gray-500" th:text="${item.brand}"></p>
+                        </div>
+                        <div class="flex items-center justify-between mt-2">
+                            <form th:action="@{/cart/update}" method="POST" class="flex items-center border border-gray-200 rounded">
+                                <input type="hidden" name="productId" th:value="${item.id}" />
+
+                                <button type="submit" name="quantity" th:value="${quantity - 1}" class="px-2 py-1 text-gray-600 hover:bg-gray-100">
+                                    -
+                                </button>
+                                <span class="px-2 text-sm font-medium" th:text="${quantity}"></span>
+                                <button type="submit" name="quantity" th:value="${quantity + 1}" class="px-2 py-1 text-gray-600 hover:bg-gray-100">
+                                    +
+                                </button>
+                            </form>
+
+                            <form th:action="@{/cart/update}" method="POST">
+                                <input type="hidden" name="productId" th:value="${item.id}" />
+                                <button type="submit" name="action" value="remove" class="text-red-500 hover:text-red-600 p-1" title="Xóa">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 6h18"/><path d="M19 6v14c0 1-1 2-2 2H7c-1 0-2-1-2-2V6"/><path d="M8 6V4c0-1 1-2 2-2h4c1 0 2 1 2 2v2"/></svg>
+                                </button>
+                            </form>
+                        </div>
+                    </div>
+                    <div class="text-right ml-4">
+                        <p class="font-bold text-brand-600" th:text="${#numbers.formatCurrency(item.price * quantity)}"></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="lg:w-1/4 h-fit lg:sticky lg:top-24 bg-white p-6 rounded-xl shadow-xl border border-gray-100">
+            <h3 class="text-lg font-bold text-gray-900 mb-4">Tóm tắt đơn hàng</h3>
+
+            <div class="flex justify-between mb-2 text-sm">
+                <span class="text-gray-500">Tạm tính:</span>
+                <span class="font-medium" th:text="${#numbers.formatCurrency(totalPrice)}"></span>
+            </div>
+            <div class="flex justify-between mb-4 text-sm">
+                <span class="text-gray-500">Vận chuyển:</span>
+                <span class="text-green-600 font-medium">Miễn phí</span>
+            </div>
+            <div class="flex justify-between mb-6 text-xl font-bold text-gray-900 border-t pt-4">
+                <span>Tổng cộng:</span>
+                <span th:text="${#numbers.formatCurrency(totalPrice)}"></span>
+            </div>
+
+            <a th:href="@{/checkout}" class="w-full block text-center bg-brand-600 text-white py-3 rounded-xl font-bold hover:bg-brand-700 transition shadow-lg shadow-brand-500/30 mb-3">
+                Tiến hành Thanh toán
+            </a>
+            <p class="text-center text-xs text-gray-400 flex items-center justify-center gap-2">
+                <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg> Bảo mật thanh toán 100%
+            </p>
+        </div>
+    </div>
+</div>
+
+<div th:replace="~{fragments/mba-footer :: footer}"></div>
+
+</body>
+</html>

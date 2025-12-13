@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="vi" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Quản Trị Viên - MbaEvolutionAI</title>
+
+    <link rel="stylesheet" th:href="@{/assets/index.css}" />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <script th:src="@{/js/tailwind-config.js}"></script>
+</head>
+<body class="bg-gray-50 text-slate-800 antialiased font-sans">
+
+<div th:replace="~{fragments/mba-header :: navbar}"></div>
+
+<div class="max-w-7xl mx-auto px-4 py-8">
+
+    <div class="mb-8">
+        <h1 class="text-3xl font-bold text-gray-900">Dashboard Quản Trị</h1>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-12">
+
+        <a th:href="@{/mba-admin/orders}"
+           class="bg-white rounded-2xl p-6 shadow-sm border border-gray-100 flex items-center gap-4 transition-all duration-300 hover:-translate-y-1 hover:shadow-lg hover:border-blue-200 group cursor-pointer">
+            <div class="p-3 bg-blue-50 text-blue-600 rounded-xl group-hover:bg-blue-600 group-hover:text-white transition-colors">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6"/><path d="M16 13H8"/><path d="M16 17H8"/><path d="M10 9H8"/></svg>
+            </div>
+            <div>
+                <p class="text-sm text-gray-500 font-medium">Tổng đơn hàng</p>
+                <h3 class="text-2xl font-bold text-gray-800 group-hover:text-blue-600" th:text="${orderCount}">0</h3>
+            </div>
+        </a>
+
+        <a th:href="@{/mba-admin/reports}"
+           class="bg-white rounded-2xl p-6 shadow-sm border border-gray-100 flex items-center gap-4 transition-all duration-300 hover:-translate-y-1 hover:shadow-lg hover:border-green-200 group cursor-pointer">
+            <div class="p-3 bg-green-50 text-green-600 rounded-xl group-hover:bg-green-600 group-hover:text-white transition-colors">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2v20"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
+            </div>
+            <div>
+                <p class="text-sm text-gray-500 font-medium">Doanh thu</p>
+                <h3 class="text-2xl font-bold text-gray-800 group-hover:text-green-600" th:text="${#numbers.formatCurrency(totalRevenue)}">0 ₫</h3>
+            </div>
+        </a>
+
+        <a href="#product-manager"
+           class="bg-white rounded-2xl p-6 shadow-sm border border-gray-100 flex items-center gap-4 transition-all duration-300 hover:-translate-y-1 hover:shadow-lg hover:border-purple-200 group cursor-pointer">
+            <div class="p-3 bg-purple-50 text-purple-600 rounded-xl group-hover:bg-purple-600 group-hover:text-white transition-colors">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/><polyline points="3.27 6.96 12 12.01 20.73 6.96"/><line x1="12" y1="22.08" x2="12" y2="12"/></svg>
+            </div>
+            <div>
+                <p class="text-sm text-gray-500 font-medium">Sản phẩm</p>
+                <h3 class="text-2xl font-bold text-gray-800 group-hover:text-purple-600" th:text="${productCount}">0</h3>
+            </div>
+        </a>
+
+        <a th:href="@{/mba-admin/users}"
+           class="bg-white rounded-2xl p-6 shadow-sm border border-gray-100 flex items-center gap-4 transition-all duration-300 hover:-translate-y-1 hover:shadow-lg hover:border-orange-200 group cursor-pointer">
+            <div class="p-3 bg-orange-50 text-orange-600 rounded-xl group-hover:bg-orange-600 group-hover:text-white transition-colors">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+            </div>
+            <div>
+                <p class="text-sm text-gray-500 font-medium">Khách hàng</p>
+                <h3 class="text-2xl font-bold text-gray-800 group-hover:text-orange-600" th:text="${userCount}">0</h3>
+            </div>
+        </a>
+    </div>
+
+    <div id="product-manager" class="bg-white rounded-xl shadow-sm border border-gray-100 overflow-hidden p-6">
+
+        <div class="flex justify-between items-center mb-6">
+            <h2 class="text-xl font-bold text-gray-800">Quản lý Sản phẩm</h2>
+
+            <button onclick="openModal()" class="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 flex items-center gap-2 transition shadow-lg shadow-blue-500/30">
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>
+                Thêm mới
+            </button>
+        </div>
+
+        <div th:replace="~{fragments/admin/mba-products-list :: list(products=${products})}"></div>
+
+    </div>
+
+</div>
+
+<div th:replace="~{fragments/admin/mba-product-modal :: modal}"></div>
+
+<script>
+    function openModal() { document.getElementById('productModal').classList.remove('hidden'); }
+    function closeModal() { document.getElementById('productModal').classList.add('hidden'); }
+</script>
+
+</body>
+</html>

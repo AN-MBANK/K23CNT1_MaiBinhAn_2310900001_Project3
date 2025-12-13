@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="vi" xmlns:th="http://www.thymeleaf.org">
+<body>
+
+<div th:fragment="list(products)">
+
+    <div class="overflow-x-auto">
+        <table class="w-full text-sm text-left border border-gray-200 rounded-lg">
+            <thead class="bg-gray-100 text-gray-700 uppercase font-bold">
+            <tr>
+                <th class="px-4 py-3">Ảnh</th>
+                <th class="px-4 py-3">Tên sản phẩm</th>
+                <th class="px-4 py-3">Giá bán</th>
+                <th class="px-4 py-3">Kho</th>
+                <th class="px-4 py-3 text-center">Thao tác</th>
+            </tr>
+            </thead>
+            <tbody class="divide-y divide-gray-100 bg-white">
+            <tr th:each="p : ${products}" class="hover:bg-gray-50">
+                <td class="px-4 py-3">
+                    <img th:src="${p.mbaImage}" class="h-10 w-10 object-cover rounded border">
+                </td>
+                <td class="px-4 py-3 font-medium text-gray-900" th:text="${p.mbaName}"></td>
+                <td class="px-4 py-3 text-green-600 font-bold" th:text="${#numbers.formatCurrency(p.mbaPrice)}"></td>
+                <td class="px-4 py-3" th:text="${p.mbaStock}"></td>
+                <td class="px-4 py-3 text-center flex justify-center gap-3">
+                    <a th:href="@{/mba-admin(editId=${p.mbaProductId})}" class="text-blue-600 hover:text-blue-800">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 3a2.828 2.828 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5L17 3z"/></svg>
+                    </a>
+                    <form th:action="@{/mba-admin/products/delete}" method="post" onsubmit="return confirm('Xóa nhé?')">
+                        <input type="hidden" name="productId" th:value="${p.mbaProductId}" />
+                        <button type="submit" class="text-red-500 hover:text-red-700">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="3 6 5 6 21 6"/><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/><line x1="10" y1="11" x2="10" y2="17"/><line x1="14" y1="11" x2="14" y2="17"/></svg>
+                        </button>
+                    </form>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+</body>
+</html>

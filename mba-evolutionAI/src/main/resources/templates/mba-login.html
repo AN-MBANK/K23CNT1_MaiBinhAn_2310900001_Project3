@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="vi" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Đăng Nhập - MbaEvolutionAI</title>
+
+    <link rel="stylesheet" th:href="@{/assets/index.css}" />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script th:src="@{/js/tailwind-config.js}"></script>
+</head>
+<body class="bg-gray-50 text-slate-800 antialiased font-sans">
+
+<div th:replace="~{fragments/mba-header :: navbar}"></div>
+
+<div class="min-h-[80vh] flex items-center justify-center bg-gray-50 px-4">
+    <div class="max-w-md w-full bg-white rounded-2xl shadow-xl p-8 border border-gray-100">
+        <h2 class="text-3xl font-bold text-gray-900 text-center mb-6">Đăng Nhập</h2>
+
+        <div th:if="${error}" class="mb-4 p-3 bg-red-100 text-red-700 rounded-lg text-sm">
+            Tên đăng nhập hoặc mật khẩu không đúng!
+        </div>
+
+        <form th:action="@{/login}" method="POST" class="space-y-6">
+            <div>
+                <label for="username" class="block text-sm font-medium text-gray-700 mb-2">Tên đăng nhập</label>
+                <input type="text" name="username" id="username" required class="w-full border border-gray-300 rounded-lg px-3 py-3" placeholder="Nhập username"/>
+            </div>
+
+            <div>
+                <label for="password" class="block text-sm font-medium text-gray-700 mb-2">Mật khẩu</label>
+                <input type="password" name="password" id="password" required class="w-full border border-gray-300 rounded-lg px-3 py-3" placeholder="••••••••"/>
+            </div>
+
+            <button type="submit" class="w-full py-3 px-4 rounded-lg text-white bg-brand-600 hover:bg-brand-700 transition">Đăng nhập</button>
+        </form>
+
+        <div class="mt-6 text-center text-sm">
+            <span class="text-gray-500">Chưa có tài khoản? </span>
+            <a th:href="@{/register}" class="font-medium text-brand-600 hover:text-brand-500 hover:underline">
+                Đăng ký ngay
+            </a>
+        </div>
+    </div>
+</div>
+
+<div th:replace="~{fragments/mba-footer :: footer}"></div>
+
+</body>
+</html>
